@@ -1,0 +1,325 @@
+.section {
+  position: relative;
+  padding-block: var(--section-pad-y);
+  background: var(--bg-primary);
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(47, 65, 86, 0.09) 1px, transparent 1px);
+  background-size: 20px 20px;
+  mask-image: radial-gradient(ellipse 80% 60% at 15% 20%, #000 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Two-column layout: stat sidebar (start) + comparison content (end) ── */
+.layout {
+  position: relative;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.statBlock {
+  position: sticky;
+  top: calc(var(--topbar-height) + var(--nav-height) + var(--sp-8));
+}
+
+.statNumber {
+  font-size: clamp(4rem, 11vw, 7rem);
+  font-weight: var(--weight-black);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  background: var(--gradient-maroon);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: var(--sp-5);
+}
+
+.statSuffix {
+  font-size: 0.5em;
+  vertical-align: 0.2em;
+}
+
+.statDesc {
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+}
+
+.header {
+  max-width: 640px;
+  margin-bottom: var(--sp-10);
+}
+
+.heading {
+  font-size: clamp(1.75rem, 4vw, var(--text-5xl));
+  font-weight: var(--weight-extrabold);
+  letter-spacing: -0.02em;
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.75rem, 4vw, 3rem);
+  align-items: stretch;
+}
+
+.card {
+  border-radius: var(--radius-2xl);
+  padding: var(--sp-10) var(--sp-8);
+  position: relative;
+  transition: transform var(--duration-slow) var(--ease), box-shadow var(--duration-slow) var(--ease);
+}
+
+.without {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.without:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.withUs {
+  background: var(--gradient-card);
+  border: 1px solid var(--vip-gold);
+  box-shadow: var(--shadow-xl);
+}
+
+.withUs:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 56px rgba(212, 169, 74, 0.28);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+}
+
+.vipTag {
+  position: absolute;
+  top: var(--sp-6);
+  inset-inline-end: var(--sp-6);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.1em;
+  color: var(--bg-dark-alt);
+  background: var(--vip-gold);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-full);
+}
+
+.cardTitle {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  margin-bottom: var(--sp-6);
+}
+
+.without .cardTitle {
+  color: var(--text-primary);
+}
+
+.withUs .cardTitle {
+  color: var(--text-on-dark);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  font-size: var(--text-base);
+  line-height: var(--leading-snug);
+}
+
+.without .item {
+  color: var(--text-secondary);
+}
+
+.withUs .item {
+  color: var(--text-muted-on-dark);
+}
+
+.iconNo,
+.iconYes {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  font-size: 0.7rem;
+  font-weight: var(--weight-bold);
+  margin-top: 0.15rem;
+}
+
+.iconNo {
+  background: var(--accent-light);
+  color: var(--negative);
+}
+
+.iconYes {
+  background: rgba(63, 125, 92, 0.18);
+  color: #7fd9a8;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .statBlock {
+    position: static;
+  }
+}
+
+@media (max-width: 780px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Segmented control: mobile only ── */
+.switcher {
+  display: none;
+}
+
+/* ── Mobile app screen ──
+   Stat collapses to a single compact row, and the two comparison columns
+   become one card behind a segmented control so the screen holds it all. */
+@media (max-width: 768px) {
+  .section {
+    display: flex;
+    flex-direction: column;
+    padding-block: var(--sp-6);
+  }
+
+  .section > :global(.container) {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .layout {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    gap: var(--sp-5);
+  }
+
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    gap: var(--sp-4);
+  }
+
+  .statBlock {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: 'label label' 'number desc';
+    align-items: center;
+    column-gap: var(--sp-4);
+    row-gap: var(--sp-2);
+  }
+
+  .statBlock > :first-child {
+    grid-area: label;
+  }
+
+  .statNumber {
+    grid-area: number;
+    font-size: 3.25rem;
+    margin-bottom: 0;
+  }
+
+  .statDesc {
+    grid-area: desc;
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+  }
+
+  .header {
+    margin-bottom: 0;
+  }
+
+  .heading {
+    font-size: 1.4rem;
+  }
+
+  .switcher {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    padding: 4px;
+    border-radius: var(--radius-full);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+  }
+
+  .switchBtn {
+    padding: 0.55rem 0.4rem;
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    color: var(--text-secondary);
+    transition: background-color var(--duration) var(--ease), color var(--duration) var(--ease);
+  }
+
+  .switchBtnActive {
+    background: var(--gradient-card);
+    color: var(--text-on-dark);
+  }
+
+  .grid {
+    flex: 1;
+    min-height: 0;
+  }
+
+  .cardOffMobile {
+    display: none;
+  }
+
+  .card {
+    height: 100%;
+    overflow-y: auto;
+    padding: var(--sp-6) var(--sp-5);
+  }
+
+  /* The segmented control already names the side being shown */
+  .cardTitle {
+    display: none;
+  }
+
+  .vipTag {
+    top: var(--sp-4);
+    inset-inline-end: var(--sp-4);
+  }
+
+  /* clear the floating VIP badge now that the card title is gone */
+  .withUs {
+    padding-top: var(--sp-10);
+  }
+
+  .item {
+    font-size: var(--text-sm);
+  }
+}

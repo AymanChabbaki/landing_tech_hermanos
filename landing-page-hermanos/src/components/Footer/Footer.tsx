@@ -1,0 +1,190 @@
+import styles from './Footer.module.css'
+import { useTranslations } from '@/i18n/LocaleContext'
+
+const socialLinks = [
+  { label: 'Instagram', href: 'https://instagram.com/tech_hermanos_org', icon: 'instagram' },
+  { label: 'Facebook', href: 'https://www.facebook.com/share/19LxqegetN/?mibextid=wwXIfr', icon: 'facebook' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/techermanos/', icon: 'linkedin' },
+] as const
+
+const icons: Record<(typeof socialLinks)[number]['icon'], JSX.Element> = {
+  instagram: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  ),
+  facebook: (
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2C16.5 3.1 15.4 3 14.2 3c-2.6 0-4.4 1.6-4.4 4.5v2.3H7.1v3.2h2.7v8h3.7z" />
+    </svg>
+  ),
+  linkedin: (
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M6.9 8.6H3.5V20h3.4V8.6ZM5.2 4c-1.2 0-2 .8-2 1.9 0 1 .8 1.9 2 1.9 1.2 0 2-.8 2-1.9C7.2 4.8 6.4 4 5.2 4ZM20.5 20h-3.4v-6c0-1.5-.5-2.5-1.9-2.5-1 0-1.6.7-1.9 1.4-.1.2-.1.6-.1.9V20H9.8s.1-10.5 0-11.4h3.4v1.6c.4-.7 1.3-1.7 3.1-1.7 2.3 0 4.1 1.5 4.1 4.7V20Z" />
+    </svg>
+  ),
+}
+
+const channelIcons = {
+  whatsapp: (
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm5.8 14.3c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a13.7 13.7 0 0 1-5.7-4.6c-.4-.6-1-1.5-1-2.9 0-1.3.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2 0 .4-.1.5l-.3.4c-.1.2-.3.3-.1.6.3.5.8 1.2 1.4 1.7.8.7 1.4.9 1.7 1 .2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.6-.1l1.9.9c.2.1.4.2.4.3v.9Z" />
+    </svg>
+  ),
+  mail: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <rect x="3" y="5" width="18" height="14" rx="2.5" />
+      <path d="m4 6.5 8 6 8-6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  globe: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18Z" />
+    </svg>
+  ),
+  pin: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" strokeLinejoin="round" />
+      <circle cx="12" cy="10" r="2.5" />
+    </svg>
+  ),
+}
+
+const contactChannels = [
+  {
+    title: 'WhatsApp',
+    value: '+212 7 03 28 54 02',
+    href: 'https://wa.me/212703285402',
+    icon: channelIcons.whatsapp,
+  },
+  {
+    title: 'E-mail',
+    value: 'contact@techermanos.org',
+    href: 'mailto:contact@techermanos.org',
+    icon: channelIcons.mail,
+  },
+  {
+    title: 'Site',
+    value: 'www.techermanos.org',
+    href: 'https://www.techermanos.org/',
+    icon: channelIcons.globe,
+  },
+]
+
+export default function Footer() {
+  const t = useTranslations()
+
+  return (
+    <footer className={styles.footer} id="footer">
+      <div className="container">
+        <div className={styles.top}>
+          <div className={styles.brand}>
+            <a href="#home" className={styles.logo}>
+              <img src="/images/logo-text-white.png" alt="Tech Hermanos" className={styles.logoImg} />
+            </a>
+            <p className={styles.tagline}>{t.footer.tagline}</p>
+            <div className={styles.social}>
+              {socialLinks.map((s) => (
+                <a
+                  key={s.icon}
+                  href={s.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={s.label}
+                  className={styles.socialLink}
+                >
+                  {icons[s.icon]}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.col}>
+            <h3 className={styles.colTitle}>{t.footer.navTitle}</h3>
+            <ul className={styles.linkList}>
+              {t.nav.links.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} className={styles.link}>{link.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className={styles.col}>
+            <h3 className={styles.colTitle}>{t.footer.servicesTitle}</h3>
+            <ul className={styles.linkList}>
+              {t.form.serviceOptions.map((s) => (
+                <li key={s.id}>
+                  <a href="#form-section" className={styles.link}>{s.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className={styles.col}>
+            <h3 className={styles.colTitle}>{t.footer.contactTitle}</h3>
+            <ul className={styles.linkList}>
+              <li>
+                <a href="mailto:contact@techermanos.org" className={styles.link}>
+                  contact@techermanos.org
+                </a>
+              </li>
+              <li>
+                <a href="https://wa.me/212703285402" target="_blank" rel="noreferrer" className={styles.link}>
+                  +212 7 03 28 54 02
+                </a>
+              </li>
+              <li>
+                <a href="https://www.techermanos.org/" target="_blank" rel="noreferrer" className={styles.link}>
+                  www.techermanos.org
+                </a>
+              </li>
+              <li className={styles.muted}>{t.footer.address}</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Phone screens get tappable channel rows instead of the link columns,
+            which the tab bar and the form already cover. */}
+        <div className={styles.actions}>
+          {contactChannels.map((channel) => (
+            <a
+              key={channel.title}
+              href={channel.href}
+              target="_blank"
+              rel="noreferrer"
+              className={styles.actionRow}
+            >
+              <span className={styles.actionIcon} aria-hidden="true">{channel.icon}</span>
+              <span className={styles.actionText}>
+                <span className={styles.actionTitle}>{channel.title}</span>
+                <span className={styles.actionValue}>{channel.value}</span>
+              </span>
+              <span className={styles.actionChevron} aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="m9 6 6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+            </a>
+          ))}
+
+          <div className={styles.actionRow}>
+            <span className={styles.actionIcon} aria-hidden="true">{channelIcons.pin}</span>
+            <span className={styles.actionText}>
+              <span className={styles.actionTitle}>{t.footer.address}</span>
+            </span>
+          </div>
+        </div>
+
+        <div className={styles.bottom}>
+          <p className={styles.copy}>
+            © {new Date().getFullYear()} {t.footer.copyrightSuffix}
+          </p>
+        </div>
+      </div>
+    </footer>
+  )
+}

@@ -1,0 +1,240 @@
+.section {
+  position: relative;
+  padding-block: var(--section-pad-y);
+  background: var(--bg-subtle);
+  overflow: hidden;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(47, 65, 86, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  mask-image: radial-gradient(ellipse 70% 60% at 85% 100%, #000 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+.textCol {
+  position: sticky;
+  top: calc(var(--nav-height) + var(--sp-8));
+}
+
+.heading {
+  font-size: clamp(1.75rem, 4vw, var(--text-5xl));
+  font-weight: var(--weight-extrabold);
+  letter-spacing: -0.02em;
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+  margin-bottom: var(--sp-5);
+}
+
+.sub {
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  max-width: 40ch;
+}
+
+.form {
+  position: relative;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-2xl);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-5);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-primary);
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  transition: border-color var(--duration) var(--ease);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ── Custom-styled service dropdown ── */
+.selectWrap {
+  position: relative;
+}
+
+.select {
+  width: 100%;
+  padding-block: 0.85rem;
+  padding-inline: 1rem 2.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-primary);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+  color-scheme: light;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
+}
+
+.select option {
+  color: #1a1a1a;
+  background: #fff;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-subtle);
+}
+
+.select:invalid {
+  color: var(--text-muted);
+}
+
+.selectIcon {
+  position: absolute;
+  top: 50%;
+  inset-inline-end: 1rem;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+.successMsg {
+  padding: var(--sp-4);
+  border-radius: var(--radius-md);
+  background: rgba(63, 125, 92, 0.12);
+  border: 1px solid var(--positive);
+  color: var(--positive);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.spinner {
+  display: inline-block;
+  width: 1.1em;
+  height: 1.1em;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.errorMsg {
+  padding: var(--sp-4);
+  border-radius: var(--radius-md);
+  background: rgba(109, 16, 32, 0.08);
+  border: 1px solid var(--negative);
+  color: var(--negative);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 1.4s;
+  }
+}
+
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr;
+  }
+
+  .textCol {
+    position: static;
+  }
+}
+
+/* ── Mobile app screen ──
+   This is the screen that has to convert, so it's tuned so the whole form
+   including the submit button lands above the tab bar without scrolling. */
+@media (max-width: 768px) {
+  .section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: var(--sp-6);
+  }
+
+  .inner {
+    gap: var(--sp-5);
+  }
+
+  .heading {
+    font-size: 1.5rem;
+    margin-bottom: var(--sp-3);
+  }
+
+  .sub {
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .form {
+    gap: var(--sp-4);
+    padding: var(--sp-5);
+  }
+
+  .row {
+    gap: var(--sp-3);
+  }
+
+  .field {
+    gap: 0.35rem;
+  }
+
+  .label {
+    font-size: var(--text-xs);
+  }
+
+  .input,
+  .select {
+    padding-block: 0.6rem;
+  }
+}

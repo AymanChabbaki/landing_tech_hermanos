@@ -1,0 +1,288 @@
+.footer {
+  background: var(--bg-dark-alt);
+  padding-block: clamp(3rem, 6vw, 5rem) var(--sp-8);
+  position: relative;
+  overflow: hidden;
+  scroll-margin-top: calc(var(--topbar-height) + var(--nav-height) + var(--sp-4));
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: var(--gradient-gold);
+  opacity: 0.6;
+  z-index: 1;
+}
+
+.footer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(245, 239, 235, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
+  mask-image: radial-gradient(ellipse 60% 70% at 15% 0%, #000 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.top {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: clamp(2rem, 5vw, 3rem);
+  padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.logoImg {
+  height: 30px;
+  width: auto;
+}
+
+.tagline {
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-muted-on-dark);
+  max-width: 32ch;
+}
+
+.social {
+  display: flex;
+  gap: var(--sp-3);
+}
+
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-dark);
+  color: var(--text-muted-on-dark);
+  transition: color var(--duration) var(--ease), background-color var(--duration) var(--ease),
+    transform var(--duration) var(--ease);
+}
+
+.socialLink svg {
+  width: 15px;
+  height: 15px;
+}
+
+.socialLink:hover {
+  color: var(--bg-dark-alt);
+  background: var(--vip-gold);
+  transform: translateY(-2px);
+}
+
+.colTitle {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--vip-gold-light);
+  margin-bottom: var(--sp-5);
+}
+
+.linkList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.link {
+  font-size: var(--text-sm);
+  color: var(--text-muted-on-dark);
+  transition: color var(--duration) var(--ease);
+}
+
+.link:hover {
+  color: #fff;
+}
+
+.muted {
+  font-size: var(--text-sm);
+  color: var(--text-muted-on-dark);
+  opacity: 0.7;
+}
+
+.bottom {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding-top: var(--sp-8);
+  border-top: 1px solid var(--border-dark);
+}
+
+.copy {
+  font-size: var(--text-xs);
+  color: var(--text-muted-on-dark);
+  opacity: 0.7;
+}
+
+@media (max-width: 860px) {
+  .top {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .brand {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ── Tappable contact rows: mobile only ── */
+.actions {
+  display: none;
+}
+
+/* ── Mobile app screen ──
+   The link columns duplicate the tab bar and the form's service list, so the
+   contact screen drops them for full-width tap targets on each channel. */
+@media (max-width: 768px) {
+  .footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--sp-6);
+    padding-block: var(--sp-8);
+  }
+
+  .top {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+
+  .col {
+    display: none;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
+
+  .actionRow {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+    padding: 0.85rem var(--sp-4);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-dark);
+    transition: background-color var(--duration) var(--ease);
+  }
+
+  .actionRow:active {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .actionIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: rgba(212, 169, 74, 0.14);
+    color: var(--vip-gold);
+  }
+
+  .actionIcon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .actionText {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    text-align: start;
+  }
+
+  .actionTitle {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--vip-gold-light);
+  }
+
+  .actionValue {
+    font-size: var(--text-sm);
+    color: var(--text-on-dark);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .actionChevron {
+    display: inline-flex;
+    width: 18px;
+    height: 18px;
+    margin-inline-start: auto;
+    color: var(--text-muted-on-dark);
+  }
+
+  [dir='rtl'] .actionChevron {
+    transform: scaleX(-1);
+  }
+
+  .actionChevron svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .bottom {
+    padding-top: var(--sp-4);
+  }
+}
+
+@media (max-width: 560px) {
+  .footer {
+    padding-block: var(--sp-8) var(--sp-6);
+  }
+
+  .top {
+    text-align: center;
+  }
+
+  .brand {
+    align-items: center;
+    gap: var(--sp-3);
+  }
+
+  .logoImg {
+    height: 24px;
+  }
+
+  .tagline {
+    max-width: 28ch;
+    margin-inline: auto;
+  }
+
+  .social {
+    justify-content: center;
+  }
+
+  .bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: var(--sp-4);
+    gap: var(--sp-2);
+  }
+}
