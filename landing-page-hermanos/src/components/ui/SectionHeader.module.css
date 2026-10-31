@@ -1,0 +1,35 @@
+.header {
+  max-width: 760px;
+  margin-inline: auto;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  text-align: center;
+}
+
+.heading {
+  font-size: clamp(1.75rem, 4vw, var(--text-5xl));
+  font-weight: var(--weight-extrabold);
+  letter-spacing: -0.02em;
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+  text-wrap: balance;
+}
+
+html[dir='rtl'] .heading {
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+.sub {
+  margin-top: var(--sp-4);
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+}
+
+.onDark .heading {
+  color: var(--text-on-dark);
+}
+
+.onDark .sub {
+  color: var(--text-muted-on-dark);
+}

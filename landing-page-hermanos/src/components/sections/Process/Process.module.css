@@ -1,0 +1,94 @@
+.section {
+  padding-block: var(--section-pad-y);
+  background: var(--bg-secondary);
+}
+
+.steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  counter-reset: none;
+}
+
+/* Dashed line joining the three numbers on wide screens */
+.steps::before {
+  content: '';
+  position: absolute;
+  top: 32px;
+  inset-inline: 16.6%;
+  border-top: 2px dashed var(--border);
+}
+
+.step {
+  position: relative;
+  text-align: center;
+}
+
+.number {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-maroon);
+  color: #FFFFFF;
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-black);
+  box-shadow: 0 0 0 8px var(--bg-secondary), 0 10px 28px rgba(109, 16, 32, 0.35);
+  margin-bottom: var(--sp-5);
+}
+
+.title {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--sp-2);
+}
+
+.text {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  max-width: 32ch;
+  margin-inline: auto;
+}
+
+.ctaRow {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+
+@media (max-width: 760px) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .steps::before {
+    top: 32px;
+    bottom: 32px;
+    inset-inline: auto;
+    inset-inline-start: 31px;
+    border-top: none;
+    border-inline-start: 2px dashed var(--border);
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    column-gap: var(--sp-5);
+    text-align: start;
+  }
+
+  .number {
+    grid-row: span 2;
+    margin-bottom: 0;
+  }
+
+  .text {
+    margin-inline: 0;
+  }
+}

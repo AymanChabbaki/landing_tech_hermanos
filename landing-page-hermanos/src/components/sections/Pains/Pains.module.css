@@ -1,0 +1,94 @@
+.section {
+  padding-block: var(--section-pad-y);
+  background: var(--bg-primary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.card {
+  position: relative;
+  padding: var(--sp-8) var(--sp-6);
+  border-radius: var(--radius-xl);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Maroon edge marks these as the "problem" cards */
+.card::before {
+  content: '';
+  position: absolute;
+  inset-block: var(--sp-8);
+  inset-inline-start: 0;
+  width: 3px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-maroon);
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-lg);
+  background: var(--accent-subtle);
+  color: var(--accent);
+  margin-bottom: var(--sp-5);
+}
+
+.icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.title {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+  color: var(--text-primary);
+  margin-bottom: var(--sp-3);
+}
+
+.text {
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+}
+
+.bridge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-5);
+  margin-top: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+}
+
+.bridge p {
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+  max-width: 44ch;
+  text-wrap: balance;
+}
+
+@media (max-width: 1080px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: var(--sp-6) var(--sp-5);
+  }
+}
