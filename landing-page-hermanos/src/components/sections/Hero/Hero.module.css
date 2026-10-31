@@ -272,3 +272,53 @@ html[dir='rtl'] .heading {
     animation: none;
   }
 }
+
+/* Wide screens: copy + CTAs on one side, VSL on the other, so the main
+   button sits above the fold on a laptop instead of under the video */
+@media (min-width: 1100px) {
+  .inner {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    grid-template-areas:
+      'eyebrow vsl'
+      'heading vsl'
+      'subtitle vsl'
+      'actions vsl'
+      'trust vsl';
+    grid-template-rows: auto auto auto auto 1fr;
+    column-gap: clamp(2.5rem, 4vw, 4.5rem);
+    align-items: start;
+    max-width: 1360px;
+    text-align: start;
+  }
+
+  .eyebrow {
+    grid-area: eyebrow;
+    justify-self: start;
+  }
+
+  .heading {
+    grid-area: heading;
+    font-size: clamp(2.5rem, 3.8vw, 3.75rem);
+  }
+
+  .subtitle {
+    grid-area: subtitle;
+  }
+
+  .vsl {
+    grid-area: vsl;
+    align-self: center;
+    margin-bottom: 0;
+  }
+
+  .actions {
+    grid-area: actions;
+    justify-content: flex-start;
+  }
+
+  .trust {
+    grid-area: trust;
+    justify-content: flex-start;
+  }
+}

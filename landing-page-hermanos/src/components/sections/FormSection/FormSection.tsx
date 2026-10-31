@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './FormSection.module.css'
 import Button from '@/components/ui/Button'
 import SectionLabel from '@/components/ui/SectionLabel'
 import Reveal from '@/components/ui/Reveal'
-import { QualificationFormData } from '@/types'
+import { WhatsappIcon } from '@/components/ui/icons'
+import { QualificationFormData, ServiceType } from '@/types'
 import { useTranslations } from '@/i18n/LocaleContext'
+import { trackEvent, whatsappLink } from '@/lib/contact'
 
 /* Google Apps Script Web App URL (Deploy > New deployment > Web app) that appends rows to the leads sheet */
 const SHEET_WEBHOOK_URL =
@@ -23,6 +25,16 @@ export default function FormSection() {
   const [sent, setSent] = useState(false)
   const [error, setError] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+
+  /* A service card's "Demander ce service" link pre-selects it here (see Landing) */
+  useEffect(() => {
+    const onSelect = (e: Event) => {
+      const service = (e as CustomEvent<ServiceType>).detail
+      setForm((prev) => ({ ...prev, service }))
+    }
+    window.addEventListener('th:select-service', onSelect)
+    return () => window.removeEventListener('th:select-service', onSelect)
+  }, [])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -51,9 +63,9 @@ export default function FormSection() {
       })
 
       // Fire only on a confirmed successful submission, not on click
-      window.fbq?.('track', 'Lead', {
+      trackEvent('Lead', {
         content_name: serviceLabel,
-        content_category: 'Qualification VIP',
+        content_category: 'Consultation gratuite',
       })
 
       setSent(true)
@@ -70,18 +82,33 @@ export default function FormSection() {
       <div className="container">
         <div className={styles.inner}>
           <Reveal className={styles.textCol}>
-            <SectionLabel variant="light">{t.form.label}</SectionLabel>
+            <SectionLabel variant="dark">{t.form.label}</SectionLabel>
             <h2 className={styles.heading}>{t.form.heading}</h2>
             <p className={styles.sub}>{t.form.sub}</p>
+
+            <p className={styles.perksTitle}>{t.form.perksTitle}</p>
+            <ul className={styles.perks}>
+              {t.form.perks.map((perk) => (
+                <li key={perk}>
+                  <span className={styles.tick} aria-hidden="true">✓</span>
+                  {perk}
+                </li>
+              ))}
+            </ul>
           </Reveal>
 
           <Reveal as="form" className={styles.form} delay={120} onSubmit={handleSubmit}>
+            <div className={styles.scarcity}>
+              <span className={styles.scarcityDot} aria-hidden="true" />
+              {t.form.scarcity}
+            </div>
+
             <div className={styles.row}>
               <div className={styles.field}>
                 <label className={styles.label} htmlFor="firstName">{t.form.firstName.label}</label>
                 <input
                   className={styles.input}
-                  id="firstName" name="firstName" type="text"
+                  id="firstName" name="firstName" type="text" autoComplete="given-name"
                   placeholder={t.form.firstName.placeholder}
                   value={form.firstName}
                   onChange={handleChange}
@@ -92,7 +119,7 @@ export default function FormSection() {
                 <label className={styles.label} htmlFor="lastName">{t.form.lastName.label}</label>
                 <input
                   className={styles.input}
-                  id="lastName" name="lastName" type="text"
+                  id="lastName" name="lastName" type="text" autoComplete="family-name"
                   placeholder={t.form.lastName.placeholder}
                   value={form.lastName}
                   onChange={handleChange}
@@ -105,7 +132,7 @@ export default function FormSection() {
               <label className={styles.label} htmlFor="whatsapp">{t.form.whatsapp.label}</label>
               <input
                 className={styles.input}
-                id="whatsapp" name="whatsapp" type="tel"
+                id="whatsapp" name="whatsapp" type="tel" autoComplete="tel" dir="ltr"
                 placeholder={t.form.whatsapp.placeholder}
                 value={form.whatsapp}
                 onChange={handleChange}
@@ -139,15 +166,33 @@ export default function FormSection() {
             </div>
 
             {sent && (
-              <div className={styles.successMsg}>{t.form.success}</div>
+              <div className={styles.successMsg} role="status">{t.form.success}</div>
             )}
 
             {error && (
-              <div className={styles.errorMsg}>{t.form.error}</div>
+              <div className={styles.errorMsg} role="alert">{t.form.error}</div>
             )}
 
             <Button type="submit" variant="vip" size="lg" fullWidth disabled={submitting}>
               {submitting ? <span className={styles.spinner} aria-hidden="true" /> : t.form.submit}
+            </Button>
+
+            <p className={styles.privacy}>🔒 {t.form.privacy}</p>
+
+            <div className={styles.divider}>
+              <span>{t.form.orWhatsapp}</span>
+            </div>
+
+            <Button
+              href={whatsappLink(t.whatsappGreeting)}
+              variant="whatsapp"
+              size="lg"
+              fullWidth
+              external
+              onClick={() => trackEvent('Contact', { method: 'whatsapp', placement: 'form' })}
+            >
+              <WhatsappIcon />
+              {t.form.whatsappCta}
             </Button>
           </Reveal>
         </div>

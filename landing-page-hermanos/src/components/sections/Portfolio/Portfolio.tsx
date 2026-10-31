@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import styles from './Portfolio.module.css'
 import SectionLabel from '@/components/ui/SectionLabel'
 import Reveal from '@/components/ui/Reveal'
 import Button from '@/components/ui/Button'
 import { useTranslations } from '@/i18n/LocaleContext'
+import { trackEvent } from '@/lib/contact'
 
 const showcaseVideos = [
   {
@@ -35,14 +36,7 @@ const StarIcon = () => (
   </svg>
 )
 
-interface PortfolioProps {
-  /* Mobile app-shell only: false while this screen is switched away from,
-     so a playing demo doesn't keep running (with audio) off-screen. Always
-     true on desktop, where the section is just part of the scrolling page. */
-  active?: boolean
-}
-
-export default function Portfolio({ active = true }: PortfolioProps) {
+export default function Portfolio() {
   const t = useTranslations()
   const showcaseVideoRefs = useRef<Record<string, HTMLVideoElement | null>>({})
   const showcaseAudioRefs = useRef<Record<string, HTMLAudioElement | null>>({})
@@ -50,12 +44,6 @@ export default function Portfolio({ active = true }: PortfolioProps) {
   const [playingId, setPlayingId] = useState<string | null>(null)
   const [mutedIds, setMutedIds] = useState<Record<string, boolean>>({})
   const [progress, setProgress] = useState<Record<string, number>>({})
-  useEffect(() => {
-    if (active || !playingId) return
-    showcaseVideoRefs.current[playingId]?.pause()
-    showcaseAudioRefs.current[playingId]?.pause()
-    setPlayingId(null)
-  }, [active, playingId])
 
   const toggleShowcasePlay = (id: string) => {
     const video = showcaseVideoRefs.current[id]
@@ -78,6 +66,7 @@ export default function Portfolio({ active = true }: PortfolioProps) {
 
     video.currentTime = 0
     video.play()
+    trackEvent('PortfolioPlay', { video: id })
     if (audio) {
       audio.currentTime = 0
       audio.play()
@@ -238,10 +227,9 @@ export default function Portfolio({ active = true }: PortfolioProps) {
           })}
         </div>
 
-        {/* Phone screens close on the CTA rather than dead space */}
-        <div className={styles.mobileCta}>
-          <Button href="#form-section" variant="primary" size="lg" fullWidth>
-            {t.nav.cta}
+        <div className={styles.cta}>
+          <Button href="#form-section" variant="vip" size="xl">
+            {t.process.cta}
           </Button>
         </div>
       </div>

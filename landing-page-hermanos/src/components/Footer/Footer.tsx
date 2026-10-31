@@ -116,9 +116,9 @@ export default function Footer() {
           <div className={styles.col}>
             <h3 className={styles.colTitle}>{t.footer.servicesTitle}</h3>
             <ul className={styles.linkList}>
-              {t.form.serviceOptions.map((s) => (
+              {t.form.serviceOptions.filter((s) => s.id !== 'unsure').map((s) => (
                 <li key={s.id}>
-                  <a href="#form-section" className={styles.link}>{s.label}</a>
+                  <a href="#form-section" data-service={s.id} className={styles.link}>{s.label}</a>
                 </li>
               ))}
             </ul>
@@ -133,7 +133,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://wa.me/212703285402" target="_blank" rel="noreferrer" className={styles.link}>
+                <a href="https://wa.me/212703285402" target="_blank" rel="noreferrer" className={styles.link} dir="ltr">
                   +212 7 03 28 54 02
                 </a>
               </li>
@@ -161,7 +161,7 @@ export default function Footer() {
               <span className={styles.actionIcon} aria-hidden="true">{channel.icon}</span>
               <span className={styles.actionText}>
                 <span className={styles.actionTitle}>{channel.title}</span>
-                <span className={styles.actionValue}>{channel.value}</span>
+                <span className={styles.actionValue} dir="ltr">{channel.value}</span>
               </span>
               <span className={styles.actionChevron} aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

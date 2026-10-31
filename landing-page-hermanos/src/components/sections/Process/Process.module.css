@@ -8,7 +8,6 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(1.25rem, 3vw, 2.5rem);
-  counter-reset: none;
 }
 
 /* Dashed line joining the three numbers on wide screens */

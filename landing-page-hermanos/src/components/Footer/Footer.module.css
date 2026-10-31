@@ -145,9 +145,9 @@
   display: none;
 }
 
-/* ── Mobile app screen ──
-   The link columns duplicate the tab bar and the form's service list, so the
-   contact screen drops them for full-width tap targets on each channel. */
+/* ── Phones ──
+   The link columns duplicate the page above, so the footer swaps them for
+   full-width tap targets on each contact channel. */
 @media (max-width: 768px) {
   .footer {
     display: flex;

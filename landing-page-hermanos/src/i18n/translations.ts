@@ -128,7 +128,7 @@ export const translations: Record<Locale, Content> = {
     meta: {
       title: 'Tech Hermanos | Site Web, App & Publicité · Consultation gratuite',
       description:
-        "Site web, application, système sur mesure et publicité : une seule équipe pour transformer votre idée ou votre business en machine à clients. Consultation gratuite, réponse sous 24h.",
+        "Site web, application, système sur mesure et publicité : une seule équipe pour transformer votre idée ou votre business en machine à clients. Consultation gratuite, réponse sous 24h.",
     },
     topbar: {
       items: ['Consultation gratuite', 'Réponse WhatsApp sous 24h', 'Places limitées ce mois-ci'],
@@ -150,7 +150,7 @@ export const translations: Record<Locale, Content> = {
         after: '.',
       },
       subtitle:
-        "Une seule équipe s'occupe de tout : votre site, votre application, votre système de gestion et vos publicités. Que vous débutiez ou que vous soyez déjà installé, on construit ce qui vous ramène des clients.",
+        "Une seule équipe s'occupe de tout : votre site, votre application, votre système de gestion et vos publicités. Que vous débutiez ou que vous soyez déjà installé, on construit ce qui vous ramène des clients.",
       vslLabel: "Regardez d'abord cette courte vidéo",
       vslPlay: 'Lancer la vidéo',
       ctaPrimary: 'Je réserve ma consultation gratuite',
@@ -158,7 +158,7 @@ export const translations: Record<Locale, Content> = {
       trust: ['100% gratuit', 'Réponse sous 24h', 'Sans engagement'],
     },
     audience: {
-      label: 'Pour qui ?',
+      label: 'Pour qui ?',
       heading: 'Quelle que soit votre activité, on a la solution digitale qu’il vous faut',
       items: [
         'Commerçants & boutiques',
@@ -171,7 +171,7 @@ export const translations: Record<Locale, Content> = {
       ],
     },
     pains: {
-      label: 'Vous vous reconnaissez ?',
+      label: 'Vous vous reconnaissez ?',
       heading: 'Si un de ces points vous parle, cette page est faite pour vous',
       items: [
         {
@@ -184,25 +184,25 @@ export const translations: Record<Locale, Content> = {
         },
         {
           title: 'Vos pubs coûtent cher et ne rapportent rien',
-          text: 'Vous boostez des publications au hasard. Résultat : des likes, mais pas de clients ni de ventes.',
+          text: 'Vous boostez des publications au hasard. Résultat : des likes, mais pas de clients ni de ventes.',
         },
         {
           title: 'Vous avez une idée mais ne savez pas par où commencer',
           text: 'Une app, une plateforme, une boutique en ligne… Le projet est là, mais la technique vous bloque.',
         },
       ],
-      bridge: 'Bonne nouvelle : chacun de ces problèmes a une solution. Et on s’en occupe pour vous.',
+      bridge: 'Bonne nouvelle : chacun de ces problèmes a une solution. Et on s’en occupe pour vous.',
       cta: 'Je veux une solution',
     },
     services: {
       label: 'Nos services',
       heading: 'Tout ce dont votre business a besoin pour grandir, au même endroit',
-      sub: 'Choisissez un service ou combinez-les : une seule équipe, un seul interlocuteur, zéro prise de tête.',
+      sub: 'Choisissez un service ou combinez-les : une seule équipe, un seul interlocuteur, zéro prise de tête.',
       items: [
         {
           id: 'web',
           title: 'Site Web & E-commerce',
-          text: 'Un site rapide, beau et pensé pour vendre : site vitrine, boutique en ligne ou landing page.',
+          text: 'Un site rapide, beau et pensé pour vendre : site vitrine, boutique en ligne ou landing page.',
           bullets: ['Design sur mesure', 'Optimisé mobile & Google', 'Commandes & paiement en ligne'],
         },
         {
@@ -214,7 +214,7 @@ export const translations: Record<Locale, Content> = {
         {
           id: 'system',
           title: 'Système sur mesure',
-          text: 'Stock, commandes, réservations, clients : automatisez tout ce qui vous fait perdre du temps.',
+          text: 'Stock, commandes, réservations, clients : automatisez tout ce qui vous fait perdre du temps.',
           bullets: ['Tableau de bord clair', 'Automatisation des tâches', 'Accès pour toute l’équipe'],
         },
         {
@@ -239,7 +239,7 @@ export const translations: Record<Locale, Content> = {
       heading: 'Avec ou sans Tech Hermanos, le résultat change tout',
       withoutTitle: 'Sans Tech Hermanos',
       withTitle: 'Avec Tech Hermanos',
-      vipTag: '✓',
+      vipTag: 'Recommandé',
       without: [
         'Un site amateur qui ne convertit pas vos visiteurs en clients',
         'Des prestataires différents pour le web, l’app et les pubs, zéro cohérence',
@@ -286,39 +286,39 @@ export const translations: Record<Locale, Content> = {
     },
     faq: {
       label: 'Questions fréquentes',
-      heading: 'Vous avez des questions ? On a les réponses',
+      heading: 'Vous avez des questions ? On a les réponses',
       items: [
         {
-          q: 'Combien coûte un projet ?',
+          q: 'Combien coûte un projet ?',
           a: 'Chaque projet est différent. Après la consultation gratuite, vous recevez un devis clair et détaillé, adapté à votre budget. Pas de surprise, pas de frais cachés.',
         },
         {
-          q: 'Je n’y connais rien en technique, c’est un problème ?',
+          q: 'Je n’y connais rien en technique, c’est un problème ?',
           a: 'Pas du tout, c’est justement notre rôle. On vous explique tout simplement et on prend en charge toute la partie technique.',
         },
         {
-          q: 'Je débute, ce n’est pas trop tôt pour moi ?',
+          q: 'Je débute, ce n’est pas trop tôt pour moi ?',
           a: 'Non. Que vous lanciez votre première activité ou que vous ayez déjà une entreprise, on adapte la solution à votre étape et à vos moyens.',
         },
         {
-          q: 'Combien de temps faut-il pour lancer mon projet ?',
+          q: 'Combien de temps faut-il pour lancer mon projet ?',
           a: 'Cela dépend de la taille du projet. Dès la consultation, on vous donne un planning précis avec des étapes claires.',
         },
         {
-          q: 'Vous travaillez uniquement à Casablanca ?',
+          q: 'Vous travaillez uniquement à Casablanca ?',
           a: 'Notre équipe est basée à Casablanca, mais on peut travailler entièrement à distance, où que vous soyez.',
         },
         {
-          q: 'La consultation est vraiment gratuite ?',
+          q: 'La consultation est vraiment gratuite ?',
           a: 'Oui, 100% gratuite et sans engagement. Vous repartez avec des conseils concrets, même si vous décidez de ne pas travailler avec nous.',
         },
       ],
     },
     form: {
       label: 'Consultation gratuite',
-      heading: 'Prêt à faire décoller votre business ?',
+      heading: 'Prêt à faire décoller votre business ?',
       sub: 'Remplissez ce formulaire en 30 secondes. Un membre de l’équipe vous contacte sur WhatsApp sous 24h.',
-      perksTitle: 'Pendant la consultation, vous obtenez :',
+      perksTitle: 'Pendant la consultation, vous obtenez :',
       perks: [
         'Une analyse de votre situation actuelle',
         'Des recommandations concrètes pour votre projet',
@@ -329,7 +329,7 @@ export const translations: Record<Locale, Content> = {
       firstName: { label: 'Prénom *', placeholder: 'Votre prénom' },
       lastName: { label: 'Nom *', placeholder: 'Votre nom' },
       whatsapp: { label: 'Numéro WhatsApp *', placeholder: '+212 6XX XXX XXX' },
-      service: { label: 'Quel service vous intéresse ? *', placeholder: 'Choisissez un service' },
+      service: { label: 'Quel service vous intéresse ? *', placeholder: 'Choisissez un service' },
       serviceOptions: [
         { id: 'web', label: 'Site Web / E-commerce' },
         { id: 'app', label: 'Application Mobile' },
@@ -338,11 +338,11 @@ export const translations: Record<Locale, Content> = {
         { id: 'comments-remover', label: 'Suppression de commentaires' },
         { id: 'unsure', label: 'Je ne sais pas encore' },
       ],
-      success: "Demande envoyée ! Un membre de l'équipe vous contacte sur WhatsApp sous 24h.",
+      success: "Demande envoyée ! Un membre de l'équipe vous contacte sur WhatsApp sous 24h.",
       error: "Une erreur s'est produite. Merci de réessayer ou de nous écrire directement sur WhatsApp.",
       submit: 'Je réserve ma consultation gratuite',
       privacy: 'Vos informations restent confidentielles. Zéro spam.',
-      orWhatsapp: 'Vous préférez écrire directement ?',
+      orWhatsapp: 'Vous préférez écrire directement ?',
       whatsappCta: 'Discuter sur WhatsApp',
       whatsappMessage: {
         title: 'Demande · Tech Hermanos',
@@ -355,7 +355,7 @@ export const translations: Record<Locale, Content> = {
     },
     footer: {
       tagline:
-        'Site web, application, système et publicité : une seule équipe pour faire grandir votre business.',
+        'Site web, application, système et publicité : une seule équipe pour faire grandir votre business.',
       navTitle: 'Navigation',
       servicesTitle: 'Services',
       contactTitle: 'Contact',
@@ -484,7 +484,7 @@ export const translations: Record<Locale, Content> = {
       heading: 'مع أو بدون Tech Hermanos، النتيجة تتغيّر بالكامل',
       withoutTitle: 'بدون Tech Hermanos',
       withTitle: 'مع Tech Hermanos',
-      vipTag: '✓',
+      vipTag: 'الأفضل',
       without: [
         'موقع هاوٍ لا يحوّل زوارك إلى عملاء',
         'مقدّمو خدمات مختلفون للموقع والتطبيق والإعلانات، بدون أي انسجام',

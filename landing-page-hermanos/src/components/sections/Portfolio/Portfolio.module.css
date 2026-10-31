@@ -233,44 +233,14 @@
   }
 }
 
-/* ── Closing CTA: mobile only ── */
-.mobileCta {
-  display: none;
+.cta {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(2rem, 5vw, 3rem);
 }
 
-/* ── Mobile app screen ──
-   The demo reel becomes a full-height swipeable carousel: each card fills
-   the leftover space so a phone shows one big demo instead of a small card
-   stranded in empty space. */
 @media (max-width: 768px) {
-  .section {
-    display: flex;
-    flex-direction: column;
-    padding-block: var(--sp-6) var(--sp-5);
-  }
-
-  .section > :global(.container) {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-    gap: var(--sp-4);
-  }
-
-  .header {
-    margin-bottom: 0;
-  }
-
-  .heading {
-    font-size: 1.35rem;
-    margin-bottom: 0;
-  }
-
-  /* the carousel peek and dots already say "swipe", so the hint text goes */
-  .sub {
-    display: none;
-  }
-
   /* A single 16:9 card can't fill a tall phone without cropping the work, so
      the demos stack into a vertical feed instead — more work on screen, no
      dead space, and scrolling it is the natural phone gesture. */
@@ -294,10 +264,5 @@
   .showcasePlayBtn svg {
     width: 26px;
     height: 26px;
-  }
-
-  .mobileCta {
-    display: block;
-    margin-top: var(--sp-2);
   }
 }

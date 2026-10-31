@@ -199,14 +199,13 @@
   display: none;
 }
 
-/* ── Mobile app screen ──
+/* ── Phones ──
    Stat collapses to a single compact row, and the two comparison columns
-   become one card behind a segmented control so the screen holds it all. */
+   become one card behind a segmented control. */
 @media (max-width: 768px) {
   .section {
     display: flex;
     flex-direction: column;
-    padding-block: var(--sp-6);
   }
 
   .section > :global(.container) {
