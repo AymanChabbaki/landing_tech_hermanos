@@ -2,20 +2,26 @@ import { useRef, useState } from 'react'
 import styles from './Hero.module.css'
 import Button from '@/components/ui/Button'
 import { ArrowIcon, WhatsappIcon } from '@/components/ui/icons'
-import { useTranslations } from '@/i18n/LocaleContext'
+import { useLocale, useTranslations } from '@/i18n/LocaleContext'
+import { Locale } from '@/i18n/translations'
 import { trackEvent, whatsappLink } from '@/lib/contact'
 
-/* The VSL shown in the hero. Drop the landscape export from Google Flow in
-   /public/videos and point these at it — the frame is 16:9, and a vertical
-   clip still works (it's letterboxed over a blurred copy of the poster). */
-const VSL = {
-  mp4: '/videos/pitch.mp4',
-  webm: '/videos/pitch.webm',
-  poster: '/images/pitch-poster.jpg',
+/* The VSL shown in the hero, per language. The frame is 16:9; a vertical clip
+   still works (it's letterboxed over a blurred copy of the poster). */
+const VSLS: Record<Locale, { sources: { src: string; type: string }[]; poster: string }> = {
+  fr: {
+    sources: [{ src: '/videos/vsl-fr.mp4', type: 'video/mp4' }],
+    poster: '/images/vsl-fr-poster.jpg',
+  },
+  ar: {
+    sources: [{ src: '/videos/vsl-ar.mp4', type: 'video/mp4' }],
+    poster: '/images/vsl-ar-poster.jpg',
+  },
 }
 
 export default function Hero() {
   const t = useTranslations()
+  const VSL = VSLS[useLocale()]
   const videoRef = useRef<HTMLVideoElement>(null)
   const [started, setStarted] = useState(false)
   const milestones = useRef(new Set<number>())
@@ -63,6 +69,7 @@ export default function Hero() {
 
             <div className={styles.vslFrame} style={{ backgroundImage: `url(${VSL.poster})` }}>
               <video
+                key={VSL.poster}
                 ref={videoRef}
                 className={styles.video}
                 controls={started}
@@ -72,8 +79,9 @@ export default function Hero() {
                 onTimeUpdate={handleTimeUpdate}
                 onEnded={() => trackEvent('VSLComplete')}
               >
-                <source src={VSL.webm} type="video/webm" />
-                <source src={VSL.mp4} type="video/mp4" />
+                {VSL.sources.map((s) => (
+                  <source key={s.src} src={s.src} type={s.type} />
+                ))}
               </video>
 
               {!started && (
