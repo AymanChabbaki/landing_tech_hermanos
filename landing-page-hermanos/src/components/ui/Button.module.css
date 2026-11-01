@@ -152,3 +152,16 @@
 .fullWidth {
   width: 100%;
 }
+
+/* Never let a long label push a button wider than a phone screen */
+.btn {
+  max-width: 100%;
+}
+
+@media (max-width: 560px) {
+  .btn {
+    white-space: normal;
+    text-align: center;
+    line-height: 1.25;
+  }
+}

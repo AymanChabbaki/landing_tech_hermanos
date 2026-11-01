@@ -46,7 +46,12 @@ export default function Landing({ locale }: { locale: Locale }) {
       const service = anchor?.dataset.service
       if (service) window.dispatchEvent(new CustomEvent('th:select-service', { detail: service }))
 
-      const el = document.getElementById(href.slice(1))
+      /* On phones the form sits under its heading, so CTAs jump straight to
+         the form card itself rather than the top of the section. */
+      let id = href.slice(1)
+      if (id === 'form-section' && window.matchMedia('(max-width: 900px)').matches) id = 'lead-form'
+
+      const el = document.getElementById(id)
       if (el) el.scrollIntoView({ behavior: 'smooth' })
     }
     document.addEventListener('click', handler, true)

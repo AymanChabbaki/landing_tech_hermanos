@@ -85,7 +85,11 @@ export default function FormSection() {
             <SectionLabel variant="dark">{t.form.label}</SectionLabel>
             <h2 className={styles.heading}>{t.form.heading}</h2>
             <p className={styles.sub}>{t.form.sub}</p>
+          </Reveal>
 
+          {/* Perks are their own block so phones can show them under the form
+              instead of making visitors scroll past them to reach it. */}
+          <Reveal className={styles.perksCol} delay={200}>
             <p className={styles.perksTitle}>{t.form.perksTitle}</p>
             <ul className={styles.perks}>
               {t.form.perks.map((perk) => (
@@ -97,7 +101,7 @@ export default function FormSection() {
             </ul>
           </Reveal>
 
-          <Reveal as="form" className={styles.form} delay={120} onSubmit={handleSubmit}>
+          <Reveal as="form" id="lead-form" className={styles.form} delay={120} onSubmit={handleSubmit}>
             <div className={styles.scarcity}>
               <span className={styles.scarcityDot} aria-hidden="true" />
               {t.form.scarcity}

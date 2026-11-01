@@ -9,16 +9,31 @@
   position: relative;
 }
 
+/* minmax(0, …) lets the columns shrink below their content's natural width,
+   so a long button label can't push the form off a phone screen. */
 .inner {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: clamp(2rem, 5vw, 4rem);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  grid-template-areas:
+    'text form'
+    'perks form';
+  grid-template-rows: auto 1fr;
+  column-gap: clamp(2rem, 5vw, 4rem);
   align-items: start;
 }
 
 .textCol {
-  position: sticky;
-  top: calc(var(--nav-height) + var(--sp-8));
+  grid-area: text;
+}
+
+.perksCol {
+  grid-area: perks;
+}
+
+.form {
+  grid-area: form;
+  /* clears the fixed top bar + navbar when a CTA scrolls straight to the form */
+  scroll-margin-top: calc(var(--topbar-height) + var(--nav-height) + var(--sp-3));
 }
 
 .heading {
@@ -262,33 +277,116 @@ html[dir='rtl'] .heading {
   }
 }
 
+/* Phones & small tablets: heading → form → perks, one column */
 @media (max-width: 900px) {
   .inner {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'text'
+      'form'
+      'perks';
+    grid-template-rows: auto;
+    row-gap: var(--sp-6);
   }
 
   .textCol {
-    position: static;
+    text-align: center;
+  }
+
+  .sub {
+    margin-inline: auto;
+  }
+
+  .perksCol {
+    padding: var(--sp-5);
+    border-radius: var(--radius-xl);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-dark);
+  }
+
+  .perksTitle {
+    margin-top: 0;
   }
 }
 
 @media (max-width: 768px) {
-  .perksTitle {
-    margin-top: var(--sp-6);
+  .section {
+    padding-block: var(--sp-12) var(--sp-10);
+  }
+
+  .heading {
+    font-size: 1.75rem;
+    margin-bottom: var(--sp-3);
+  }
+
+  .sub {
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
   }
 
   .perks {
+    gap: var(--sp-3);
     font-size: var(--text-sm);
+  }
+
+  .perks li {
+    align-items: flex-start;
   }
 
   .form {
     gap: var(--sp-4);
-    padding: var(--sp-5);
+    padding: var(--sp-6) var(--sp-5);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(212, 169, 74, 0.25);
   }
 
+  .scarcity {
+    align-self: center;
+  }
+
+  /* first + last name stay side by side: one less row to scroll */
+  .row {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-3);
+  }
+
+  .field {
+    gap: 0.4rem;
+    min-width: 0;
+  }
+
+  .label {
+    font-size: 0.8125rem;
+    font-weight: var(--weight-semibold);
+  }
+
+  /* 16px text stops iOS from zooming in on focus; 52px is a comfortable tap target */
+  .input,
+  .select {
+    min-height: 52px;
+    font-size: 16px;
+    border-radius: var(--radius-lg);
+  }
+
+  .input {
+    padding: 0.8rem 0.9rem;
+  }
+
+  .form :global(button[type='submit']) {
+    min-height: 56px;
+    white-space: normal;
+    line-height: 1.25;
+    font-size: var(--text-base);
+  }
+
+  .privacy {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 340px) {
   .row {
     grid-template-columns: 1fr;
-    gap: var(--sp-4);
   }
 }
 

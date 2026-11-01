@@ -1,4 +1,5 @@
 import styles from './Footer.module.css'
+import { WHATSAPP_DISPLAY, WHATSAPP_NUMBER } from '@/lib/contact'
 import { useTranslations } from '@/i18n/LocaleContext'
 
 const socialLinks = [
@@ -56,8 +57,8 @@ const channelIcons = {
 const contactChannels = [
   {
     title: 'WhatsApp',
-    value: '+212 7 03 28 54 02',
-    href: 'https://wa.me/212703285402',
+    value: WHATSAPP_DISPLAY,
+    href: `https://wa.me/${WHATSAPP_NUMBER}`,
     icon: channelIcons.whatsapp,
   },
   {
@@ -133,8 +134,8 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://wa.me/212703285402" target="_blank" rel="noreferrer" className={styles.link} dir="ltr">
-                  +212 7 03 28 54 02
+                <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer" className={styles.link} dir="ltr">
+                  {WHATSAPP_DISPLAY}
                 </a>
               </li>
               <li>
